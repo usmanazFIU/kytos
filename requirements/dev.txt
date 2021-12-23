@@ -16,7 +16,7 @@ babel==2.8.0              # via sphinx
 backcall==0.1.0           # via -r requirements/run.txt, ipython
 certifi==2019.11.28       # via requests
 chardet==3.0.4            # via requests
-click==7.1.1              # via -r requirements/run.txt, flask, pip-tools
+click>=7.1.1              # via -r requirements/run.txt, flask, pip-tools
 coverage==5.0.4           # via -r requirements/dev.in
 decorator==4.4.2          # via -r requirements/run.txt, ipython, traitlets
 distlib==0.3.0            # via virtualenv
