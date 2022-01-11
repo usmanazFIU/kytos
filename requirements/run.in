@@ -1,7 +1,6 @@
 # Since the install procedure install the packages below from pypi, we cannot
 # pin versions outside pypi, i.e. latest git master branch version.
 ipython==7.31.0
-lockfile
 python-openflow>=2021.1
 flask-socketio==5.1.1
 flask_cors==3.0.10
