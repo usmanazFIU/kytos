@@ -86,7 +86,7 @@ itsdangerous==2.0.1
     # via
     #   -r requirements/run.txt
     #   flask
-janus==1.0.0
+janus==0.4.0
     # via -r requirements/run.txt
 jedi==0.16.0
     # via
@@ -185,7 +185,7 @@ python-socketio==5.5.1
     #   flask-socketio
 pytz==2021.3
     # via babel
-requests==2.27.1
+requests==2.27.0
     # via sphinx
 six==1.16.0
     # via
@@ -239,7 +239,7 @@ typing-extensions==4.0.1
     #   astroid
     #   janus
     #   pylint
-urllib3==1.26.8
+urllib3==1.26.7
     # via requests
 virtualenv==20.13.0
     # via tox

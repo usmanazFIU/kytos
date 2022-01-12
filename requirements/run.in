@@ -6,7 +6,7 @@ flask-socketio==5.1.1
 flask_cors==3.0.10
 flask==2.0.2
 python-daemon==2.3.0
-janus==1.0.0
+janus==0.4.0
 jinja2==3.0.3
 watchdog==2.1.6
 pyjwt==2.3.0
