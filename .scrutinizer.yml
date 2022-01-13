@@ -4,6 +4,25 @@ checks:
         duplicate_code: true
 build:
     nodes:
+        py36:
+            environment:
+                python: 3.6.15
+                postgresql: false
+                redis: false
+            dependencies:
+                before:
+                    - pip install coverage
+            tests:
+                override:
+                    -
+                        command: 'tox -e py36'
+                        only_if: 'tox -a | grep -q py36'
+                        idle_timeout: 300
+                        coverage:
+                            file: '.coverage'
+                            config_file: '.coveragerc'
+                            format: 'py-cc'
+                    - py-scrutinizer-run
         py37:
             environment:
                 python: 3.7.1
@@ -23,9 +42,9 @@ build:
                             config_file: '.coveragerc'
                             format: 'py-cc'
                     - py-scrutinizer-run
-        pyOthers:
+        py38:
             environment:
-                python: 3.6
+                python: 3.8.12
                 postgresql: false
                 redis: false
             dependencies:
@@ -34,7 +53,27 @@ build:
             tests:
                 override:
                     -
-                        command: 'for env in $(tox -a | grep -v py37); do tox -e $env; done'
+                        command: 'tox -e py38'
+                        only_if: 'tox -a | grep -q py38'
+                        idle_timeout: 300
+                        coverage:
+                            file: '.coverage'
+                            config_file: '.coveragerc'
+                            format: 'py-cc'
+                    - py-scrutinizer-run
+        py39:
+            environment:
+                python: 3.9.2 # same version as debian-bullseye
+                postgresql: false
+                redis: false
+            dependencies:
+                before:
+                    - pip install coverage
+            tests:
+                override:
+                    -
+                        command: 'tox -e py37'
+                        only_if: 'tox -a | grep -q py39'
                         idle_timeout: 300
                         coverage:
                             file: '.coverage'
