@@ -1,5 +1,6 @@
 """Module with common classes for the controller."""
 from enum import Enum
+from threading import Lock
 
 from kytos.core.config import KytosConfig
 
@@ -21,6 +22,7 @@ class GenericEntity:
         """Create the GenericEntity object with empty metadata dictionary."""
         options = KytosConfig().options['daemon']
         self.metadata = {}
+        self._metadata_lock = Lock()
 
         self._active: bool = True
         self._enabled: bool = options.enable_entities_by_default
@@ -73,27 +75,31 @@ class GenericEntity:
 
     def add_metadata(self, key, value):
         """Add a new metadata (key, value)."""
-        if key in self.metadata:
-            return False
+        with self._metadata_lock:
+            if key in self.metadata:
+                return False
 
-        self.metadata[key] = value
-        return True
+            self.metadata[key] = value
+            return True
 
     def remove_metadata(self, key):
         """Try to remove a specific metadata."""
-        try:
-            del self.metadata[key]
-            return True
-        except KeyError:
-            return False
+        with self._metadata_lock:
+            try:
+                del self.metadata[key]
+                return True
+            except KeyError:
+                return False
 
     def get_metadata(self, key):
         """Try to get a specific metadata."""
-        return self.metadata.get(key)
+        with self._metadata_lock:
+            return self.metadata.get(key)
 
     def get_metadata_as_dict(self):
         """Get all metadata values as dict."""
-        metadata = dict(self.metadata)
+        with self._metadata_lock:
+            metadata = dict(self.metadata)
         for key, value in self.metadata.items():
             if hasattr(value, 'as_dict'):
                 metadata[key] = value.as_dict()
@@ -101,20 +107,23 @@ class GenericEntity:
 
     def update_metadata(self, key, value):
         """Overwrite a specific metadata."""
-        self.metadata[key] = value
+        with self._metadata_lock:
+            self.metadata[key] = value
 
     def clear_metadata(self):
         """Remove all metadata information."""
-        self.metadata = {}
+        with self._metadata_lock:
+            self.metadata = {}
 
     def extend_metadata(self, metadatas, force=True):
         """Extend the metadata information.
 
         If force is True any existing value is overwritten.
         """
-        if force:
-            self.metadata.update(metadatas)
-            return
+        with self._metadata_lock:
+            if force:
+                self.metadata.update(metadatas)
+                return
 
         for key, value in metadatas.items():
             self.add_metadata(key, value)
