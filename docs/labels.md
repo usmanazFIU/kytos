@@ -37,7 +37,7 @@ http "https://api.github.com/search/issues?q=org:kytos-ng+label:2022.1rc1+state:
 http "https://api.github.com/search/issues?q=org:amlight+label:bug+state:open+is:issue&sort=created"
 ```
 
-- How can you search for all issues labeled with `priority-critical` and `bug` in the `kytos-ng` org?
+- How can you search for all open issues labeled with `priority-critical` and `bug` in the `kytos-ng` org?
 
 ```
 http "https://api.github.com/search/issues?q=org:kytos-ng+label:priority_critical+label:bug+state:open+is:issue&sort=created"
