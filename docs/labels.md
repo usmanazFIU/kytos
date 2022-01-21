@@ -12,7 +12,7 @@ This label is meant for planning the current issues and enhancements. For exampl
 
 Contributors should prioritize picking up issues and enhancements that have a planned version and based on their priority value, if there is no version set yet, then a `next_release` (string) label should be used, and then replaced as soon as the team is done planning the scope of the upcoming version.
 
-Kytos use this version pattern `yyyy.<number>` (year.number) and NApps use SemVer `[2]`, if both are being released, the NApp issue might carry on both tags to facilitate filtering for kytos release scope as well, otherwise, they will only have their specific tag if they are being released individually.
+Kytos use this version pattern `yyyy.<number>` (year.number) and NApps use SemVer `[2]`, if both are being released, the NApp issue might have attached both labels on GitHub to facilitate filtering for kytos release scope as well, otherwise, they will only have their specific label if they are being released individually. 
 
 ### Examples
 
